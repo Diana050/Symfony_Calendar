@@ -1,0 +1,5 @@
+{
+    "require": {
+        "symfony/google-mailer": "^6.1"
+    }
+}
