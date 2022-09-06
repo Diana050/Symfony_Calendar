@@ -5,10 +5,10 @@ let liElementCollection = document.getElementById("matrix").getElementsByTagName
 
 arrowLeftElement.click();
 arrowRightElement.click();
-//
-// document.getElementById("location").addEventListener("click", function (){
-//     document.getElementById("try").submit();
-// })
+
+document.getElementById("location").addEventListener("click", function () {
+    document.getElementById('getLocationForm').value = document.getElementById('location').value;
+})
 
 let monthsArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const queryString = window.location.search;
@@ -102,7 +102,7 @@ arrowRightElement.addEventListener("click", surfNextMonth);
 arrowLeftElement.addEventListener("click", surfPreviousMonth);
 
 function refreshCalendarToCurrentDate() {
-    let currentDate=moment();
+    let currentDate = moment();
     // if(dateForNOtRefresh !=null)
     //  currentDate = moment(dateForNOtRefresh ,"YYYY-MM-DD");
 
@@ -113,7 +113,7 @@ function refreshCalendarToCurrentDate() {
     document.getElementById("month").innerText = `${currentMonth} ${currentYear}`;
     // const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-     const product = urlParams.get('date')
+    const product = urlParams.get('date')
     if (product !== null)
         document.getElementById("scheduleDate").innerText = `Schedule for ${product}`;
     else
@@ -136,13 +136,16 @@ function showDate() {
         document.getElementById("scheduleDate").innerText = `Schedule for ${product}`;
     else
         document.getElementById("scheduleDate").innerText = `Schedule for ${month} ${this.innerText}, ${year}`;
-//     let x = `${year}-${moment().month(month).format("M")}-${this.innerText}`;
-//     let y = moment(x).format('YYYY-MM-DD');
-//     document.getElementById("getDateForm").value = y;
-//     document.getElementById('getLocationForm').value = document.getElementById('location').value;
-//     document.getElementById('invisible').submit();
+    let x = `${year}-${moment().month(month).format("M")}-${this.innerText}`;
+    let y = moment(x).format('YYYY-MM-DD');
+    document.getElementById("getDateForm").value = y;
+    document.getElementById('getLocationForm').value = document.getElementById('location').value;
+    document.getElementById('getDateFormForApt').value = y;
+    document.getElementById('getLocationFormForApt').value = document.getElementById('location').value;
+    document.getElementById('invisible').submit();
 }
 
 for (const li of liElementCollection) {
     li.addEventListener("click", showDate);
 }
+console.log( )
