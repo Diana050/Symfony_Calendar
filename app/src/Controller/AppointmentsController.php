@@ -8,13 +8,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AppointmentsController extends AbstractController
 {
+//    public function __construct(protected FlashBag $flashBag)
+//    {
+//
+//    }
     #[Route('/appointments', name: 'app_appointments')]
     public function index(Request $request, EntityManagerInterface $db): Response
     {
+
 
         $location = $db->getRepository(Locations::class)->findOneBy([
             'id' => $request->request->get('location'),
@@ -52,14 +58,15 @@ class AppointmentsController extends AbstractController
             'id_location_id' => $currentLocation
         ]);
 
+
         if (new \DateTime('today') > \DateTime::createFromFormat('Y-m-d', $request->request->get('date'))) {
-            $this->flash->now('error', 'Please select a future day!');
+            $this->addFlash('error', 'Please select a future day!');
             return false;
         } else if ($numberOfAppointmentsInSelectedDay >= $currentLocation->getCapacity()) {
-//          $this->flash->now('error', 'Unfortunately there are no more places available for you!');
+          $this->addFlash(  'error', 'Unfortunately there are no more places available for you!');
             return false;
         } else if ($numberOfAppointmentsToday > 0) {
-//           $this->flash->now('error', 'You have already made an appointment for this date or this location!');
+         $this->addFlash('error', 'You have already made an appointment for this date or this location!');
             return false;
         } else
             return true;

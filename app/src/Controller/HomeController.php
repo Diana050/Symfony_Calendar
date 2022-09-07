@@ -16,10 +16,16 @@ class HomeController extends AbstractController
     public function index(Request $request, EntityManagerInterface $db): Response
     {
         $getParams = $request->query->get('date') ?? null;
+        $getParamsLocation = $request->query->get('location') ?? null;
         $appointments = [];
 
         $locations = $db->getRepository(Locations::class)->findAll();
-        if ($getParams) {
+
+        $selctedLocation = $db->getRepository(Locations::class)->findOneBy([
+        'id' => $request->query->get('location'),
+    ]) ?? $db->getRepository(Locations::class)->findOneBy(["id" => 1]);
+
+            if ($getParams && $getParamsLocation) {
 
             $date = $getParams;
 
@@ -28,10 +34,6 @@ class HomeController extends AbstractController
             ]);
 
         }
-
-        $selctedLocation = $db->getRepository(Locations::class)->findOneBy([
-            'id' => $request->query->get('location'),
-        ]) ?? $db->getRepository(Locations::class)->findOneBy(["id" => 1]);
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',

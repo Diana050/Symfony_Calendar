@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Calendar!{% endblock %}
 
-{% block body %}}
+{% block body %}
+
+    {% for message in app.flashes('error') %}
+    {{ message }}
+{% endfor %}
         <section class="container">
         <section class="calendar-section">
-            <div class="glued-columns">
+            <div class="gluedColumns">
                 <ul class="month-and-arrows">
-                    <li>
+                    <li >
                         <div class="h1-and-arrows">
                             <div class="arrows">
                                 <button id="arrowL" class="arrowRL">&#8617;</button>
@@ -71,7 +75,7 @@
                 </ol>
             </div>
         </section>
-        <section class="people-section">
+        <div class="people-section">
             <h2 id="scheduleDate"></h2>
 
             <select name="location" id="location">
@@ -90,8 +94,8 @@
             </div>
 
             <form action="/appointments" method="post" >
-                <input type="text" id="getDateForm" name="date" value="{{ date }}"></br>
-                <input type="text" id="getLocationForm" name="location">
+                <input  type="text" id="getDateForm" name="date" value="{{ date }}"></br>
+                <input  type="text" id="getLocationForm" name="location"    >
                 <input type="submit" value="Submit">
                                 {% for appointment in appointments %}
 
@@ -102,9 +106,10 @@
             </form>
 
             <form method="get" id="invisible">
-                <input stype="text" id="getDateFormForApt" name="date">
-                <input stype="text" id="getLocationFormForApt" name="location">
+                <input style="display: none" type="text" id="getDateFormForApt" name="date">
+                <input style="display: none" type="text" id="getLocationFormForApt" name="location">
             </form>
+        </div>
         </section>
-    </section>
+
 {% endblock %}

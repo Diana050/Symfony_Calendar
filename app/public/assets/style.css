@@ -9,8 +9,7 @@ html {
     padding-top: 5vh;
 
 }
-.glued-columns
-{
+.gluedColumns{
     display: flex;
     flex-direction: column;
 }
@@ -19,10 +18,11 @@ html {
     margin-left: 10vw;
 }
 
-.month-and-arrows li{
+.month-and-arrows ol{
     background-color: rgb(204, 204, 255);
-    height: 10vh;
+    height: 9vh;
     list-style-type: none;
+
 }
 
 .days {
@@ -40,6 +40,15 @@ html {
     font-weight: bold;
     color: rgb(0, 0, 102);
     font-family: -moz-fixed;
+    height: 6vh;
+}
+
+ol {
+    margin-bottom: 0px;
+}
+
+ul{
+    list-style-type: none;
 }
 
 .matrix {
@@ -48,7 +57,6 @@ html {
     grid-template-columns: repeat(7, 8rem);
     grid-template-rows: repeat(6, 6rem);
     justify-content: center;
-
 }
 
 
@@ -96,6 +104,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 .arrows {

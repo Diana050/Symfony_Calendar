@@ -148,4 +148,5 @@ function showDate() {
 for (const li of liElementCollection) {
     li.addEventListener("click", showDate);
 }
-console.log( )
+
+
